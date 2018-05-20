@@ -1,0 +1,85 @@
+{{ if .IsHome -}}
+  {{ partial "schemas/schema_WebSite.html" . }}
+{{- else if .IsPage -}}
+
+  {{ if or (in .Params.contenttypes "AggregateRating") }}
+    {{ partial "schemas/schema_AggregateRating.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "Article") }}
+    {{ partial "schemas/schema_Article.html" . }}
+  {{ end }}
+
+  {{ if or (eq .Type "blog") (in .Params.contenttypes "BlogPosting") }}
+    {{ partial "schemas/schema_BlogPosting.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "BreadcrumbList") }}
+    {{ partial "schemas/schema_BreadcrumbList.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "Course") }}
+    {{ partial "schemas/schema_Course.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "JobPosting") }}
+    {{ partial "schemas/schema_JobPosting.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "LocalBusiness") }}
+    {{ partial "schemas/schema_LocalBusiness.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "LocalBusiness-2") }}
+    {{ partial "schemas/schema_LocalBusiness-2.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "LocalBusiness-3") }}
+    {{ partial "schemas/schema_LocalBusiness-3.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "LocalBusiness-4") }}
+    {{ partial "schemas/schema_LocalBusiness-4.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "Person") }}
+    {{ partial "schemas/schema_Person.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "QuestionAnswers") }}
+    {{ partial "schemas/schema_Question-w-Answers.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "Service") }}
+    {{ partial "schemas/schema_Service.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "ServiceArea") }}
+    {{ partial "schemas/schema_ServiceArea.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "SiteNavigationElement") }}
+    {{ partial "schemas/schema_SiteNavigationElement.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "SpeakableSpecification") }}
+    {{ partial "schemas/schema_SpeakableSpecification.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "VideoObject") }}
+    {{ partial "schemas/schema_VideoObject.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "ViewAction") }}
+    {{ partial "schemas/schema_ViewAction.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "Website") }}
+    {{ partial "schemas/schema_WebSite.html" . }}
+  {{ end }}
+
+  {{ if or (in .Params.contenttypes "WPHeader") }}
+    {{ partial "schemas/schema_WPHeader.html" . }}
+  {{ end }}
+
+{{- end }}
