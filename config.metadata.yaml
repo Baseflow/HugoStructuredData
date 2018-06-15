@@ -1,0 +1,25 @@
+params:
+  name: "YourName"
+  contact: "hello@yourname.com"
+  phone: "0123345678"
+  copyright: "© 2018 YourName. All rights reserved."
+  description: "YourName"
+  logourl: "images/logo.png"
+  imageurl: "images/bg.jpg"
+  pricerange: "$$"
+  primarylocation: "amsterdam"
+  keywords: ["mobile", "web", "ai", "backend", "open source"]
+  social:
+    website: "https://yourwebsite.com"
+    github: "YourName"
+    facebook: "YourName"
+    facebook_admin: "1111111"  # This needs to be a page admin to get domain insights
+    twitter: "YourName"
+    twitter_domain: "yourname.com" # This domain shows in twitter cards as "View on `twitter_domain`"
+    googleplus: "YourName"
+    pinterest: "YourName"
+    instagram: "YourName"
+    youtube: "YourName"
+    linkedin: "YourName"
+  images:
+    ["images/bg.jpg"] # For twitter cards

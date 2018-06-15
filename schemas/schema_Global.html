@@ -6,7 +6,7 @@
     {{ partial "schemas/schema_AggregateRating.html" . }}
   {{ end }}
 
-  {{ if or (in .Params.contenttypes "Article") }}
+  {{ if or (eq .Type "article") (in .Params.contenttypes "Article") }}
     {{ partial "schemas/schema_Article.html" . }}
   {{ end }}
 
@@ -30,16 +30,16 @@
     {{ partial "schemas/schema_LocalBusiness.html" . }}
   {{ end }}
 
-  {{ if or (in .Params.contenttypes "LocalBusiness-2") }}
-    {{ partial "schemas/schema_LocalBusiness-2.html" . }}
+  {{ if or (in .Params.contenttypes "LocalBusiness_Legal") }}
+    {{ partial "schemas/schema_LocalBusiness_Legal.html" . }}
   {{ end }}
 
-  {{ if or (in .Params.contenttypes "LocalBusiness-3") }}
-    {{ partial "schemas/schema_LocalBusiness-3.html" . }}
+  {{ if or (in .Params.contenttypes "LocalBusiness_Notary") }}
+    {{ partial "schemas/schema_LocalBusiness_Notary.html" . }}
   {{ end }}
 
-  {{ if or (in .Params.contenttypes "LocalBusiness-4") }}
-    {{ partial "schemas/schema_LocalBusiness-4.html" . }}
+  {{ if or (in .Params.contenttypes "LocalBusiness_Store") }}
+    {{ partial "schemas/schema_LocalBusiness_Store.html" . }}
   {{ end }}
 
   {{ if or (in .Params.contenttypes "Person") }}
@@ -47,7 +47,7 @@
   {{ end }}
 
   {{ if or (in .Params.contenttypes "QuestionAnswers") }}
-    {{ partial "schemas/schema_Question-w-Answers.html" . }}
+    {{ partial "schemas/schema_Question_Answers.html" . }}
   {{ end }}
 
   {{ if or (in .Params.contenttypes "Service") }}

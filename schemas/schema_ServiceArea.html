@@ -1,40 +1,32 @@
+{{ if isset .Params "location" }}{{ $location := index .Site.Data.locations .Params.location }}
 <script type='application/ld+json'>
 {
 	"@context": "http://schema.org",
 	"@type": "localBusiness",
-	"name": "Acme Inc.",
-	"image": "required-image.jpg",
-	"telephone": "+15553217654",
-	"priceRange": "$$",
+	"name": "{{ .Site.Params.name }}",
+	"image": "{{ $location.thumbnail | absURL }}",
+	"telephone": "{{ .Site.Params.phone }}",
+	"priceRange": "{{ .Site.Params.pricerange }}",
 	"address": {
 		"@type": "PostalAddress",
-		"streetAddress": "4321 Street Dr.",
-		"addressLocality": "Richmond",
-		"addressRegion": "BC",
-		"addressCountry": "Canada",
-		"postalCode": "V6G1G9"
+		"streetAddress": "{{ $location.address.street }}",
+		"addressLocality": "{{ $location.address.city }}",
+		"addressRegion": "{{ $location.address.region }}",
+		"addressCountry": "{{ $location.address.country }}",
+		"postalCode": "{{ $location.address.postalcode }}"
 	},
 	"serviceArea": [
 		{
 			"@type": "place",
-			"name": "Vancouver",
+			"name": "{{ $location.address.city }}",
 			"address": {
 				"@type": "PostalAddress",
-				"addressLocality": "Vancouver",
-				"addressRegion": "BC",
-				"addressCountry": "Canada"
-			}
-		},
-		{
-			"@type": "place",
-			"name": "Burnaby",
-			"address": {
-				"@type": "PostalAddress",
-				"addressLocality": "Burnaby",
-				"addressRegion": "BC",
-				"addressCountry": "Canada"
+				"addressLocality": "{{ $location.address.city }}",
+				"addressRegion": "{{ $location.address.region }}",
+				"addressCountry": "{{ $location.address.country }}"
 			}
 		}
 	]
 }
 </script>
+{{ end }}

@@ -1,0 +1,23 @@
+
+{{ if .social }}
+{{ if .social.twitter }}"https://twitter.com/{{ .social.twitter }}",{{ end }}
+{{ if .social.pinterest }}"https://pinterest.com/{{ .social.pinterest }}",{{ end }}
+{{ if .social.instagram }}"https://instagram.com/{{ .social.instagram }}",{{ end }}
+{{ if .social.facebook }}"https://www.facebook.com/{{ .social.facebook }}",{{ end }}
+{{ if .social.linkedin }}"https://ca.linkedin.com/in/{{ .social.linkedin }}/en",{{ end }}
+{{ if .social.googleplus }}"https://plus.google.com/+{{ .social.googleplus }}",{{ end }}
+{{ if .social.youtube }}"https://www.youtube.com/user/{{ .social.youtube }}",{{ end }}
+{{ if .social.github }}"https://github.com/{{ .social.github }}",{{ end }}
+{{ if .social.wordpress }}"https://profiles.wordpress.org/{{ .social.wordpress }}",{{ end }}
+{{ if .social.angel }}"https://angel.co/{{ .social.angel }}",{{ end }}
+{{ if .social.foursquare }}"https://www.foursquare.com/user/{{ .social.foursquare }}",{{ end }}
+{{ if .social.yelp }}"https://{{ .social.yelp }}.yelp.ca",{{ end }}
+{{ if .social.codepen }}"https://codepen.io/{{ .social.codepen }}/",{{ end }}
+{{ if .social.stackoverflow }}"https://stackoverflow.com/users/{{ .social.stackoverflow }}",{{ end }}
+{{ if .social.dribbble }}"https://dribbble.com/{{ .social.dribbble }}",{{ end }}
+{{ if .social.deviantart }}"http://{{ .social.deviantart }}.deviantart.com/",{{ end }}
+{{ if .social.behance }}"https://www.behance.net/{{ .social.behance }}",{{ end }}
+{{ if .social.flickr }}"https://www.flickr.com/people/{{ .social.flickr }}/",{{ end }}
+{{ if .social.medium }}"https://medium.com/@{{ .social.medium }}",{{ end }}
+{{ if .social.website }}"{{ .social.website }}"{{ else }}"{{ .Site.Params.social.website }}"{{ end }}
+{{ end }}

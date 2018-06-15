@@ -1,38 +1,41 @@
+{{ $baseUrl := .Site.BaseURL }}
+{{ $location := index .Site.Data.location .Site.Params.primarylocation }}
 <script type="application/ld+json">
 [
 	{
 		"@context": "http://schema.org",
 		"@type": "Webpage",
-		"specialty": "CNBC homepage, stock markets, business news, financial news",
+		"specialty": "{{ .Site.Params.description }}",
 		"mainContentOfPage": {
 			"@context": "http://schema.org/",
 			"@type": "WebPageElement",
 			"cssSelector": ".body-content"
-		}
+		},
+		"primaryImageOfPage": "{{ .Site.Params.imageurl | absURL }}"
 	},
 	{
 		"@context": "http://schema.org",
 		"@type": "WebSite",
-		"@id": "https://jay.holtslander.ca/#website",
+		"@id": "{{ .Site.BaseURL }}",
 		"additionalType": ["CreativeWork", "Person"],
-		"url": "https://jay.holtslander.ca",
-		"name": "Jay Holtslander",
-		"alternateName": "j_holtslander",
-		"headline": "Like a page title",
-		"image": "https://jay.holtslander.ca/facebook.jpg",
-		"inLanguage": "en-CA",
-		"author": "Jay Holtslander",
-		"description": "Personal website of Jay Holtslander. Co-founder of CodeCore Bootcamp.",
-		"disambiguatingDescription": "Personal website of Jay Holtslander",
+		"url": "{{ .Site.BaseURL }}",
+		"name": "{{ .Site.Title }}",
+		"alternateName": "{{ .Site.Title }}",
+		"headline": "{{ .Site.Params.description }}",
+		"image": "{{ .Site.Params.imageurl | absURL }}",
+		"inLanguage": "{{ .Site.LanguageCode }}",
+		"author": "{{ .Site.Params.author }}",
+		"description": "{{ .Site.Params.description }}",
+		"disambiguatingDescription": "{{ .Site.Params.description }}",
 		"isFamilyFriendly": "http://schema.org/True",
 		"contentRating": "NR",
-		"sourceOrganization": "CNBC",
+		"sourceOrganization": "{{ .Site.Title }}",
 		"publisher": {
 		  "@type": "Organization",
-		  "name": "ThinkwithGoogle",
+		  "name": "{{ .Site.Title }}",
 		  "logo": {
 		    "@type": "ImageObject",
-		    "url": "https://www.thinkwithgoogle.com/_qs/static/img/global/twg-logo-small.jpg",
+		    "url": "{{ .Site.Params.logourl | absURL }}",
 		    "height": 60,
 		    "width": 107
 		  }
@@ -40,17 +43,17 @@
 		"mainEntity": {
 			"@context": "http://schema.org",
 			"@type": "localBusiness",
-			"name": "Jay Holtslander",
-			"image":"http://placehold.it/512",
-			"priceRange":"$$",
-			"telephone":"555-321-7654",
+			"name": "{{ .Site.Title }}",
+			"image":"{{ $location.thumbnail | absURL }}",
+			"priceRange":"{{ .Site.Params.pricerange }}",
+			"telephone":"{{ .Site.Params.phone }}",
 			"address": {
 				"@type": "PostalAddress",
-				"streetAddress": "#600 - 55 Water Street, Vancouver, BC V6B 1A1",
-				"addressLocality": "Vancouver",
-				"addressRegion": "British Columbia",
-				"addressCountry": "Canada",
-				"postalCode": "v6b1a1"
+				"streetAddress": "{{ $location.address.street }}",
+				"addressLocality": "{{ $location.address.city }}",
+				"addressRegion": "{{ $location.address.region }}",
+				"addressCountry": "{{ $location.address.country }}",
+				"postalCode": "{{ $location.address.postalcode }}"
 			},
 			"aggregateRating": {
 				"@type": "AggregateRating",
@@ -60,49 +63,45 @@
 		},
 		"potentialAction": {
 			"@type": "SearchAction",
-			"target": "https://jay.holtslander.ca/?s={search_term}",
+			"target": "{{ .Site.BaseURL }}?search={search_term}",
 			"query-input": "required name=search_term"
 		},
 		"keywords":[
-			"Social Networking",
-			"Social Media",
-			"News",
-			"Web",
-			"Technology",
-			"Web 2.0",
-			"Tech",
-			"Information",
-			"Blog",
-			"Facebook",
-			"YouTube",
-			"Google",
-			"Top"
+			{{ range $i, $e := .Site.Params.keywords }}{{ if $i }}, {{ end }}"{{ $e }}"{{ end }}
 		],
 		"hasPart": [
 			{
 				"@context": "http://schema.org/",
 				"@type": "WPHeader",
 				"@id": "#header",
-				"headline": "headline-string",
+				"headline": "{{ .Site.Params.description }}",
 				"cssSelector": "#header",
-				"potentialAction": {
-					"@type": "Action",
-					"name": "Contact",
-					"target": "http://google.ca/"
-				}
+				"potentialAction": [{{ range $i, $e := .Site.Menus.actions }}{{ if $i }}, {{ end }}
+					{
+						"@type": "Action",
+						"name": "{{ $e.Title }}",
+						"target": "{{ $e.URL | absURL }}"
+					}
+					{{- end -}}
+				],
+				"@graph": 
+				[{{ range $i, $e := .Site.Menus.main }}{{ if $i }}, {{ end }}
+					{
+						"@context": "https://schema.org",
+						"@type":"SiteNavigationElement",
+						"@id":"#header",
+						"name": "{{ $e.Title }}",
+						"url": "{{ $e.URL | absURL }}"
+					}
+					{{- end -}}
+				]
 			},
 			{
 				"@context": "http://schema.org/",
 				"@type": "WPSidebar",
 				"cssSelector": "#sidebar",
 				"citation": [
-					"https://domain.com/link",
-					"https://domain2.com/link2",
-					"https://domain2.com/link3"
-				],
-				"comment": [
-					"This is a user comment that may appear in the sidebar.",
-					"This is another user comment that may be there as well."
+				{{ range $i, $e := .Site.Menus.main }}{{ if $i }}, {{ end }}"{{ $e.URL | absURL }}"{{ end }}
 				]
 			},
 			{
@@ -110,60 +109,11 @@
 				"@type": "WPFooter",
 				"cssSelector": ".footer",
 				"@id": "#footer",
-				"copyrightHolder":"Jay Holtslander",
-				"publisher": "Jay Holtslander",
-				"copyrightYear":"2017"
+				"copyrightHolder":"{{ .Site.Title }}",
+				"publisher": "{{ .Site.Title }}",
+				"copyrightYear":"{{ now.Format "2006"}}"
 			}
 		]
 	}
 ]
-</script>
-
-
-
-<!-- 
-NOTE: Despite the below snippet for SiteNavigationElements being totally seperate, it will be "sucked into" the above snippet for "Website" because of the matching @id of #header.
--->
-<script type="application/ld+json">
-{
-	"@context": "https://schema.org",
-	"@graph": 
-	[
-      {
-          "@context": "https://schema.org",
-          "@type":"SiteNavigationElement",
-          "@id":"#header",
-          "name": "Page 1",
-          "url": "https://www.example.com/page1"
-      },
-      {
-          "@context": "https://schema.org",
-          "@type":"SiteNavigationElement",
-          "@id":"#header",
-          "name": "Page 2",
-          "url": "https://www.example.com/page2"
-      },
-      {
-          "@context": "https://schema.org",
-          "@type":"SiteNavigationElement",
-          "@id":"#header",
-          "name": "Page 3",
-          "url": "https://www.example.com/page3"
-      },
-      {
-          "@context": "https://schema.org",
-          "@type":"SiteNavigationElement",
-          "@id":"#pagination",
-          "name": "Previous page",
-          "url": "https://www.example.com/page1"
-      },
-      {
-          "@context": "https://schema.org",
-          "@type":"SiteNavigationElement",
-          "@id":"#pagination",
-          "name": "Next page",
-          "url": "https://www.example.com/page2"
-      }
-	]
-}
 </script>

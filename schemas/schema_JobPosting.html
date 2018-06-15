@@ -8,24 +8,20 @@ Resources:
 {
   "@context" : "http://schema.org/",
   "@type" : "JobPosting",
-  "title" : "Data Entry Clerk",
-  "description" : "<p>Widget assembly role for pressing wheel assemblies.</p>
-    <p><strong>Educational Requirements:</strong> Completed level 2 ISTA
-    Machinist Apprenticeship.</p>
-    <p><strong>Required Experience:</strong> At
-    least 3 years in a machinist role.</p>",
+  "title" : "{{ .Title }}",
+  "description" : "{{ .Description }}",
   "identifier": {
     "@type": "PropertyValue",
-    "name": "MagsRUs Wheel Company",
+    "name": "{{ .Site.Params.name }}",
     "value": "1234567"
   },
-  "datePosted" : "2017-01-18",
+  "datePosted" : "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
   "validThrough" : "2017-03-18T00:00",
   "employmentType" : ["FULL_TIME", "CONTRACTOR"],
   "hiringOrganization" : {
     "@type" : "Organization",
-    "name" : "MagsRUs Wheel Company",
-    "sameAs" : "http://www.magsruswheelcompany.com"
+    "name" : "{{ .Site.Params.name }}",
+    "sameAs" : "{{ .Site.BaseURL }}"
   },
   "jobLocation" : {
     "@type" : "Place",
@@ -55,6 +51,6 @@ Resources:
   "qualifications": "",
   "responsibilities": "",
   "skills": "",
-  "workHours": "",
+  "workHours": ""
 }
 </script>

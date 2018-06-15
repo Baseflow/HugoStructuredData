@@ -1,134 +1,59 @@
+{{ $location := index .Site.Data.location .Site.Params.primarylocation }}
 <script type="application/ld+json">
 	{
 		"@context":"http://schema.org",
-		"@type": "BlogPosting",
-		"image": "http://domain.com/blog/post/featured-image.jpg",
-		"url": "http://domain.com/blog/post",
+		"@type": "BlogPosting", {{ with .Resources.Match "icon" }}{{ with index . 0 }}
+		"image": "{{ .Permalink }}", {{ end }}{{ end }}
+		"url": "{{ .Permalink }}",
 		"headline": "{{ .Title }}",
-		"alternativeHeadline": "A secondary title of the CreativeWork.",
-		"dateCreated": "2017-12-14T17:39:52",
-		"datePublished": "2017-12-14T17:39:52",
-		"dateModified": "2017-12-14T17:39:52",
-		"inLanguage": "en-CA",
+		"alternativeHeadline": "{{ .Title }}",
+		"dateCreated": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+		"datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+		"dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
+		"inLanguage": "{{ .Site.LanguageCode }}",
 		"isFamilyFriendly": "true",
-		"copyrightYear": "2018",
-		"copyrightHolder": "",
+		"copyrightYear": "{{ .PublishDate.Format "2006" | safeHTML }}",
+		"copyrightHolder": "{{ .Site.Params.name }}",
 		"contentLocation": {
 			"@type": "Place",
-			"name": "Vancouver, BC"
+			"name": "{{ $location.address.city }}"
 		},
+		{{ if isset .Params "author" }}{{ $author := index .Site.Data.team .Params.author }}
 		"accountablePerson": {
 			"@type": "Person",
-			"name": "Jay Holtslander",
-			"url": "https://jay.holtslander.ca"
+			"name": "{{ $author.name }}",
+			"url": "{{ .Site.BaseURL }}"
 		},
 		"author": {
 			"@type": "Person",
-			"name": "Jay Holtslander",
-			"url": "https://jay.holtslander.ca"
+			"name": "{{ $author.name }}",
+			"url": "{{ .Site.BaseURL }}"
 		},
 		"creator": {
 			"@type": "Person",
-			"name": "Jay Holtslander",
-			"url": "https://jay.holtslander.ca"
+			"name": "{{ $author.name }}",
+			"url": "{{ .Site.BaseURL }}"
 		},
+		{{ end }}
 		"publisher": {
 			"@type": "Organization",
-			"name": "Jay Holtslander",
-			"url": "https://jay.holtslander.ca",
+			"name": "{{ .Site.Params.name }}",
+			"url": "{{ .Site.BaseURL }}",
 			"logo": {
 				"@type": "ImageObject",
-				"url": "http://www.example.com/logo.png",
+				"url": "{{ .Site.Params.logourl | absURL }}",
 				"width":"357",
 				"height":"60"
 			}
 		},
-		"sponsor": {
-			"@type": "Organization",
-			"name": "Acme Widgets",
-			"url": "https://domain.com",
-			"logo": {
-				"@type": "ImageObject",
-				"url": "http://www.domain.com/logo.png"
-			}
-		},
 		"mainEntityOfPage": "True",
-		"keywords": [
-			"keyword1",
-			"keyword2",
-			"keyword3",
-			"keyword4"
+		"keywords": [ {{ if .Keywords }}
+			{{ range $i, $e := .Keywords }}{{ if $i }}, {{ end }}"{{ $e }}"{{ end }}
+		{{ else }}
+			{{ range $i, $e := .Site.Params.keywords }}{{ if $i }}, {{ end }}"{{ $e }}"{{ end }}{{ end }}
 		],
-		"genre":["Tutorials","Coding"],
-		"articleSection": "Uncategorized posts",
-		"articleBody": "This is the content of the blog posting and is the full text (I guess(?)) Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Etiam porta sem malesuada magna mollis euismod. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec ullamcorper nulla non metus auctor fringilla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis. Aenean lacinia bibendum nulla sed consectetur."
+		"genre":["{{ .Site.Params.name }}"],
+		"articleSection": "{{ .Site.Params.name }}",
+		"articleBody": "{{ .Plain }}"
 	}
 </script>
-
-<!-- <script type="application/ld+json">
-	{
-	  "@context": "http://schema.org",
-	  "@type": "BlogPosting",
-	  "headline": "{{ .Title }}",
-	  "mainEntityOfPage": {
-		"@type": "WebPage",
-		"@id": "{{ .Permalink }}"
-	  },
-	  {{ if ge (.Param "lua.image.width") 696 -}}
-	  "image": {
-		"@type": "ImageObject",
-		"url": "{{ .Param "lua.image.url" | absURL }}",
-		"width": {{ .Param "lua.image.width" }},
-		"height": {{ .Param "lua.image.height" }}
-	  },
-	  {{- else if ge .Site.Params.image.width 696 -}}
-	   "image": {
-		"@type": "ImageObject",
-		"url": "{{ .Site.Params.image.url | absURL }}",
-		"width": {{ .Site.Params.image.width }},
-		"height": {{ .Site.Params.image.height }}
-	  },
-	  {{- end }}
-	  "genre": "{{ .Type }}",
-	  {{ with .Params.tags -}}
-	  "keywords": "{{ delimit . ", " }}",
-	  {{- end }}
-	  "wordcount": {{ .WordCount }},
-	  "url": "{{ .Permalink }}",
-	  {{ if not .PublishDate.IsZero -}}
-	  "datePublished": "{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
-	  {{- else if not .Date.IsZero -}}
-	  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
-	  {{- end }}
-	  {{ with .Lastmod -}}
-	  "dateModified": "{{ .Format "2006-01-02T15:04:05-07:00" | safeHTML }}",
-	  {{- end }}
-	  {{ with .Site.Copyright -}}
-	  "license": "{{ . }}",
-	  {{- end }}
-	  {{ with .Site.Params.publisher -}}
-	  "publisher": {
-		"@type": "Organization",
-		"name": "{{ .name }}",
-		"logo": {
-		  "@type": "ImageObject",
-		  "url": "{{ .logo.url | absURL }}",
-		  "width": {{ .logo.width }},
-		  "height": {{ .logo.height }}
-		}
-	  },
-	  {{- end }}
-	  {{ if .Params.author -}}
-	  "author": {
-		"@type": "Person",
-		"name": "{{ .Params.author }}"
-	  },
-	  {{- else if .Site.Author.name -}}
-	  "author": {
-		"@type": "Person",
-		"name": "{{ .Site.Author.name }}"
-	  },
-	  {{- end }}
-	  "description": "{{ .Description }}"
-	}
-	</script> -->

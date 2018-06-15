@@ -1,85 +1,45 @@
+{{ if isset .Params "location" }}{{ $location := index .Site.Data.location .Params.location }}
 <script type='application/ld+json'> 
 {
     "@context": "http://www.schema.org",
     "@type": "LocalBusiness",
-    "name": "Skunkworks Creative Group",
+    "name": "{{ .Site.Params.name }}",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://skunkworks.ca/"
+        "@id": "{{ .Site.BaseURL }}"
     },
     "address": [
-    /* Put the main office address here */
         {
         "@type": "PostalAddress",
-        "streetAddress": "#600 - 55 Water Street, Vancouver, BC V6B 1A1",
-        "addressLocality": "Vancouver",
-        "addressRegion": "British Columbia",
-        "addressCountry": "Canada",
-        "postalCode": "v6b1a1"
+        "streetAddress": "{{ $location.address.street }}",
+        "addressLocality": "{{ $location.address.city }}",
+        "addressRegion": "{{ $location.address.region }}",
+        "addressCountry": "{{ $location.address.country }}",
+        "postalCode": "{{ $location.address.postalcode }}"
         }
     ],
-    "telephone": "16047398976",  /* Put the main phone line here */
-    "image": "https://skunkworks.ca/facebook.jpg",
-    "priceRange": "$$$",
+    "telephone": "{{ .Site.Params.phone }}",
+    "image": "{{ .Site.BaseURL }}{{ $location.thumbnail }}",
+    "priceRange": "{{ .Site.Params.pricerange }}",
     "location": [
         {
         "@type": "PostalAddress",
-        "telephone": "+16047398976",
-        "streetAddress": "#600 - 55 Water Street, Vancouver, BC V6B 1A1",
-        "addressLocality": "Vancouver",
-        "addressRegion": "BC",
-        "addressCountry": "Canada",
-        "postalCode": "v6b1a1",
+        "telephone": "{{ .Site.Params.phone }}",
+        "streetAddress": "{{ $location.address.street }}",
+        "addressLocality": "{{ $location.address.city }}",
+        "addressRegion": "{{ $location.address.region }}",
+        "addressCountry": "{{ $location.address.country }}",
+        "postalCode": "{{ $location.address.postalcode }}",
         "serviceArea": [
             {
             "@type": "postalAddress",
-            "addressLocality":"Richmond",
-            "addressRegion": "British Columbia",
-            "addressCountry": "Canada"
-            },
-            {
-            "@type": "postalAddress",
-            "addressLocality":"Surrey",
-            "addressRegion": "British Columbia",
-            "addressCountry": "Canada"
-            },
-            {
-            "@type": "postalAddress",
-            "addressLocality":"Burnaby",
-            "addressRegion": "British Columbia",
-            "addressCountry": "Canada"
-            }
-        ]
-    },
-    {
-        "@type": "PostalAddress",
-        "telephone": "+16045918885",
-        "streetAddress": "7253-123 Street",
-        "addressLocality": "Burnaby",
-        "addressRegion": "BC",
-        "addressCountry": "Canada",
-        "postalCode": "V1A2B3",
-        "serviceArea": [
-            {
-            "@type": "postalAddress",
-            "addressLocality":"Richmond",
-            "addressRegion": "British Columbia",
-            "addressCountry": "Canada"
-            },
-            {
-            "@type": "postalAddress",
-            "addressLocality":"Surrey",
-            "addressRegion": "British Columbia",
-            "addressCountry": "Canada"
-            },
-            {
-            "@type": "postalAddress",
-            "addressLocality":"Burnaby",
-            "addressRegion": "British Columbia",
-            "addressCountry": "Canada"
+            "addressLocality":"{{ $location.address.city }}",
+            "addressRegion": "{{ $location.address.region }}",
+            "addressCountry": "{{ $location.address.country }}"
             }
         ]
     }
   ]
 }
 </script>
+{{ end }}
