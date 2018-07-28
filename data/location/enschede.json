@@ -1,0 +1,13 @@
+{
+  "name": "Enschede",
+  "thumbnail": "/company/location/enschede/enschede.jpg",
+  "email": "hello@baseflow.com",
+  "phone": "+31532032429",
+  "address": {
+    "street": "Gronausestraat 710",
+    "city": "Enschede",
+    "region": "Overijsel",
+    "country": "Netherlands",
+    "postalcode": "7534 AM"
+  }
+}

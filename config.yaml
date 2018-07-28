@@ -1,0 +1,27 @@
+params:
+  color: "#000000"
+  name: "YourName" # your company name
+  contact: "hello@yourname.com" # Primary email address
+  phone: "0123345678" # Primary phone
+  copyright: "© 2018 YourName. All rights reserved."
+  description: "YourName" # Add a short description
+  logourl: "images/logo.png" # Used in structured data as logo url
+  imageurl: "images/bg.jpg" # Used in structured data as background image
+  pricerange: "$$" # Used in structured data as price range
+  primarylocation: "enschede" # Used as primary location if no specific is set
+  primaryauthor: "martijn" # Used as primary author if no specific is set
+  keywords: ["mobile", "web", "ai", "backend", "open source"] # Can be overriden per page
+  social:
+    website: "https://baseflow.com"
+    github: "BaseflowIT"
+    facebook: "BaseflowIT"
+    facebook_admin: "1111111"  # This needs to be a page admin to get domain insights
+    twitter: "BaseflowIT"
+    twitter_domain: "baseflow.com" # This domain shows in twitter cards as "View on `twitter_domain`"
+    googleplus: "BaseflowIT"
+    pinterest: "BaseflowIT"
+    instagram: "BaseflowIT"
+    youtube: "BaseflowIT"
+    linkedin: "BaseflowIT"
+  images:
+    ["images/bg.jpg"] # For twitter cards
