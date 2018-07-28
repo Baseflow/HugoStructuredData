@@ -16,36 +16,7 @@ theme:
 - some-other-theme
 ```
 
-Add the folowing parameters to your config file:
-
-```
-params:
-  name: "YourName" # your company name
-  contact: "hello@yourname.com" # Primary email address
-  phone: "0123345678" # Primary phone
-  copyright: "© 2018 YourName. All rights reserved."
-  description: "YourName" # Add a short description
-  logourl: "images/logo.png" # Used in structured data as logo url
-  imageurl: "images/bg.jpg" # Used in structured data as background image
-  pricerange: "$$" # Used in structured data as price range
-  primarylocation: "enschede" # Used as primary location if no specific is set
-  primaryauthor: "martijn" # Used as primary author if no specific is set
-  keywords: ["mobile", "web", "ai", "backend", "open source"] # Can be overriden per page
-  social:
-    website: "https://yourwebsite.com"
-    github: "YourName"
-    facebook: "YourName"
-    facebook_admin: "1111111"  # This needs to be a page admin to get domain insights
-    twitter: "YourName"
-    twitter_domain: "yourname.com" # This domain shows in twitter cards as "View on `twitter_domain`"
-    googleplus: "YourName"
-    pinterest: "YourName"
-    instagram: "YourName"
-    youtube: "YourName"
-    linkedin: "YourName"
-  images:
-    ["images/bg.jpg"] # For twitter cards
-```
+Change the properties inside `themes/structured-data/config.yaml` to match you details.
 
 Add this snippet to the `<head>` of your baseof.html
 
@@ -70,5 +41,20 @@ date: 2018-03-28T21:58:30+02:00
 contenttypes: ["BlogPosting, "Article"]
 ---
 ```
+
+Other available properties are:
+
+```
+---
+type: blog
+layout: post
+title: "Introducing blog"
+date: 2018-06-01T16:40:55+01:00
+author: notmartijn
+contenttypes: ["BlogPosting"]
+---
+```
+
+In this case the author of the file will be `notmartijn` instead of the default author `martijn`.
 
 To add, change or remove locations or authors look in the data folder.

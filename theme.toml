@@ -3,7 +3,7 @@
 
 name = "Structured Data"
 license = "MIT"
-licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
+licenselink = "https://github.com/martijn00/HugoStructuredData/blob/master/LICENSE"
 description = "Adds structured data to your website to improve SEO"
 homepage = "http://baseflow.com/"
 tags = ["SEO"]
