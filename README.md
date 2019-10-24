@@ -5,6 +5,12 @@ Based on the work of: https://github.com/JayHoltslander/Structured-Data-JSON-LD
 
 This uses the [Hugo pipelines](https://gohugo.io/themes/theme-components/) introduced in [Hugo 0.42](https://gohugo.io/news/0.42-relnotes/)
 
+# Support
+
+* Feel free to open an issue. Make sure to use one of the templates!
+* Commercial support is available. Integration with your app or services, samples, feature request, etc. Email: [hello@baseflow.com](mailto:hello@baseflow.com)
+* Powered by: [baseflow.com](https://baseflow.com)
+
 # Usage
 
 Start by adding this theme to your website in the config file:
